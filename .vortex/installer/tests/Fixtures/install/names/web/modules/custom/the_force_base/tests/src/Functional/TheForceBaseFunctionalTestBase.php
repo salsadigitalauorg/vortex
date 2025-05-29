@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\lightsaber\Functional;
+namespace Drupal\Tests\the_force_base\Functional;
 
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\the_force_base\Traits\ArrayTrait;
@@ -11,13 +11,13 @@ use Drupal\Tests\the_force_base\Traits\MockTrait;
 use Drupal\Tests\the_force_base\Traits\ReflectionTrait;
 
 /**
- * Class LightsaberFunctionalTestBase.
+ * Class TheForceBaseFunctionalTestBase.
  *
  * Base class for functional tests.
  *
- * @package Drupal\lightsaber\Tests
+ * @package Drupal\the_force_base\Tests
  */
-abstract class LightsaberFunctionalTestBase extends BrowserTestBase {
+abstract class TheForceBaseFunctionalTestBase extends BrowserTestBase {
 
   use ArrayTrait;
   use AssertTrait;

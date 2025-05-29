@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\lightsaber\Unit;
+namespace Drupal\Tests\the_force_base\Unit;
 
 use Drupal\Tests\UnitTestCase;
 use Drupal\Tests\the_force_base\Traits\ArrayTrait;
@@ -11,13 +11,13 @@ use Drupal\Tests\the_force_base\Traits\MockTrait;
 use Drupal\Tests\the_force_base\Traits\ReflectionTrait;
 
 /**
- * Class LightsaberUnitTestBase.
+ * Class TheForceBaseUnitTestBase.
  *
  * Base class for all unit test cases.
  *
- * @package Drupal\lightsaber\Tests
+ * @package Drupal\the_force_base\Tests
  */
-abstract class LightsaberUnitTestBase extends UnitTestCase {
+abstract class TheForceBaseUnitTestBase extends UnitTestCase {
 
   use ArrayTrait;
   use AssertTrait;
