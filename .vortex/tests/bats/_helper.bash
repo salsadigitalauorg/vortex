@@ -267,7 +267,7 @@ assert_files_not_present_common() {
 
   pushd "${dir}" >/dev/null || exit 1
 
-  assert_dir_not_exists "${webroot}/modules/custom/ys_core"
+  assert_dir_not_exists "${webroot}/modules/custom/ys_base"
   assert_dir_not_exists "${webroot}/themes/custom/your_site_theme"
   assert_dir_not_exists "${webroot}/profiles/custom/${suffix}_profile"
   assert_dir_not_exists "${webroot}/modules/custom/${suffix_abbreviated}_base"
@@ -458,7 +458,7 @@ assert_files_present_drupal() {
   # Stub profile removed.
   assert_dir_not_exists "${webroot}/profiles/custom/your_site_profile"
   # Stub code module removed.
-  assert_dir_not_exists "${webroot}/modules/custom/ys_core"
+  assert_dir_not_exists "${webroot}/modules/custom/ys_base"
   # Stub theme removed.
   assert_dir_not_exists "${webroot}/themes/custom/your_site_theme"
 
@@ -533,11 +533,11 @@ assert_files_present_drupal() {
 
   # Special case to fix all occurrences of the stub in core files to exclude
   # false-positives from the assertions below.
-  replace_core_stubs "${dir}" "your_site" "${webroot}"
+  replace_drupal_core_stubs "${dir}" "your_site" "${webroot}"
 
   # Assert all stub strings were replaced.
   assert_dir_not_contains_string "${dir}" "your_site"
-  assert_dir_not_contains_string "${dir}" "ys_core"
+  assert_dir_not_contains_string "${dir}" "ys_base"
   assert_dir_not_contains_string "${dir}" "YOURSITE"
   assert_dir_not_contains_string "${dir}" "YourSite"
   assert_dir_not_contains_string "${dir}" "your_site_theme"
@@ -1158,7 +1158,7 @@ install_dependencies_stub() {
   popd >/dev/null || exit 1
 }
 
-replace_core_stubs() {
+replace_drupal_core_stubs() {
   local dir="${1}"
   local token="${2}"
   local webroot="${3:-web}"
