@@ -41,13 +41,13 @@ trait AssertFilesTrait {
   protected function assertCommonFilesAbsent(string $webroot = 'web'): void {
     // Example directories and files that should not exist after Vortex removed.
     Assert::assertDirectoryDoesNotExist($webroot . '/profiles/custom/your_site_profile');
-    Assert::assertDirectoryDoesNotExist($webroot . '/modules/custom/ys_core');
-    Assert::assertFileDoesNotExist($webroot . '/modules/custom/ys_core/tests/src/Unit/YourSiteExampleUnitTest.php');
-    Assert::assertFileDoesNotExist($webroot . '/modules/custom/ys_core/tests/src/Unit/YourSiteCoreUnitTestBase.php');
-    Assert::assertFileDoesNotExist($webroot . '/modules/custom/ys_core/tests/src/Kernel/YourSiteExampleKernelTest.php');
-    Assert::assertFileDoesNotExist($webroot . '/modules/custom/ys_core/tests/src/Kernel/YourSiteCoreKernelTestBase.php');
-    Assert::assertFileDoesNotExist($webroot . '/modules/custom/ys_core/tests/src/Functional/YourSiteExampleFunctionalTest.php');
-    Assert::assertFileDoesNotExist($webroot . '/modules/custom/ys_core/tests/src/Functional/YourSiteCoreFunctionalTestBase.php');
+    Assert::assertDirectoryDoesNotExist($webroot . '/modules/custom/ys_base');
+    Assert::assertFileDoesNotExist($webroot . '/modules/custom/ys_base/tests/src/Unit/YourSiteExampleUnitTest.php');
+    Assert::assertFileDoesNotExist($webroot . '/modules/custom/ys_base/tests/src/Unit/YourSiteCoreUnitTestBase.php');
+    Assert::assertFileDoesNotExist($webroot . '/modules/custom/ys_base/tests/src/Kernel/YourSiteExampleKernelTest.php');
+    Assert::assertFileDoesNotExist($webroot . '/modules/custom/ys_base/tests/src/Kernel/YourSiteCoreKernelTestBase.php');
+    Assert::assertFileDoesNotExist($webroot . '/modules/custom/ys_base/tests/src/Functional/YourSiteExampleFunctionalTest.php');
+    Assert::assertFileDoesNotExist($webroot . '/modules/custom/ys_base/tests/src/Functional/YourSiteCoreFunctionalTestBase.php');
     Assert::assertDirectoryDoesNotExist($webroot . '/modules/custom/ys_search');
     Assert::assertDirectoryDoesNotExist($webroot . '/themes/custom/your_site_theme');
 

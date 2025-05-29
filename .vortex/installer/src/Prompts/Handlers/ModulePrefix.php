@@ -39,12 +39,12 @@ class ModulePrefix extends AbstractHandler {
     $t = $this->tmpDir;
     $w = $this->webroot;
 
-    File::replaceContentInDir($t . sprintf('/%s/modules/custom', $w), 'ys_core', $v . '_core');
+    File::replaceContentInDir($t . sprintf('/%s/modules/custom', $w), 'ys_base', $v . '_core');
     File::replaceContentInDir($t . sprintf('/%s/modules/custom', $w), 'ys_search', $v . '_search');
-    File::replaceContentInDir($t . sprintf('/%s/themes/custom', $w), 'ys_core', $v . '_core');
-    File::replaceContentInDir($t . '/scripts/custom', 'ys_core', $v . '_core');
+    File::replaceContentInDir($t . sprintf('/%s/themes/custom', $w), 'ys_base', $v . '_core');
+    File::replaceContentInDir($t . '/scripts/custom', 'ys_base', $v . '_core');
     File::replaceContentInDir($t . '/scripts/custom', 'ys_search', $v . '_search');
-    File::replaceContentInDir($t . sprintf('/%s/modules/custom', $w), 'YsCore', Converter::pascal($v) . 'Core');
+    File::replaceContentInDir($t . sprintf('/%s/modules/custom', $w), 'YsBase', Converter::pascal($v) . 'Core');
     File::replaceContentInDir($t . sprintf('/%s/modules/custom', $w), 'YsSearch', Converter::pascal($v) . 'Search');
     File::replaceContentInDir($t, 'YSCODE', Converter::cobol($v));
     File::replaceContentInDir($t, 'YSSEARCH', Converter::cobol($v));

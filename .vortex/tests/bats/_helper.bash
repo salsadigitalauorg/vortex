@@ -267,7 +267,7 @@ assert_files_not_present_common() {
 
   pushd "${dir}" >/dev/null || exit 1
 
-  assert_dir_not_exists "${webroot}/modules/custom/ys_core"
+  assert_dir_not_exists "${webroot}/modules/custom/ys_base"
   assert_dir_not_exists "${webroot}/themes/custom/your_site_theme"
   assert_dir_not_exists "${webroot}/profiles/custom/${suffix}_profile"
   assert_dir_not_exists "${webroot}/modules/custom/${suffix_abbreviated}_core"
@@ -275,12 +275,12 @@ assert_files_not_present_common() {
   assert_dir_not_exists "${webroot}/themes/custom/${suffix}"
   assert_file_not_exists "${webroot}/sites/default/default.settings.local.php"
   assert_file_not_exists "${webroot}/sites/default/default.services.local.yml"
-  assert_file_not_exists "${webroot}/modules/custom/ys_core/tests/src/Unit/YourSiteExampleUnitTest.php"
-  assert_file_not_exists "${webroot}/modules/custom/ys_core/tests/src/Unit/YourSiteCoreUnitTestBase.php"
-  assert_file_not_exists "${webroot}/modules/custom/ys_core/tests/src/Kernel/YourSiteExampleKernelTest.php"
-  assert_file_not_exists "${webroot}/modules/custom/ys_core/tests/src/Kernel/YourSiteCoreKernelTestBase.php"
-  assert_file_not_exists "${webroot}/modules/custom/ys_core/tests/src/Functional/YourSiteExampleFunctionalTest.php"
-  assert_file_not_exists "${webroot}/modules/custom/ys_core/tests/src/Functional/YourSiteCoreFunctionalTestBase.php"
+  assert_file_not_exists "${webroot}/modules/custom/ys_base/tests/src/Unit/YourSiteExampleUnitTest.php"
+  assert_file_not_exists "${webroot}/modules/custom/ys_base/tests/src/Unit/YourSiteCoreUnitTestBase.php"
+  assert_file_not_exists "${webroot}/modules/custom/ys_base/tests/src/Kernel/YourSiteExampleKernelTest.php"
+  assert_file_not_exists "${webroot}/modules/custom/ys_base/tests/src/Kernel/YourSiteCoreKernelTestBase.php"
+  assert_file_not_exists "${webroot}/modules/custom/ys_base/tests/src/Functional/YourSiteExampleFunctionalTest.php"
+  assert_file_not_exists "${webroot}/modules/custom/ys_base/tests/src/Functional/YourSiteCoreFunctionalTestBase.php"
 
   assert_file_not_exists "docs/faqs.md"
   assert_file_not_exists ".ahoy.yml"
@@ -458,7 +458,7 @@ assert_files_present_drupal() {
   # Stub profile removed.
   assert_dir_not_exists "${webroot}/profiles/custom/your_site_profile"
   # Stub code module removed.
-  assert_dir_not_exists "${webroot}/modules/custom/ys_core"
+  assert_dir_not_exists "${webroot}/modules/custom/ys_base"
   # Stub theme removed.
   assert_dir_not_exists "${webroot}/themes/custom/your_site_theme"
 
@@ -537,7 +537,7 @@ assert_files_present_drupal() {
 
   # Assert all stub strings were replaced.
   assert_dir_not_contains_string "${dir}" "your_site"
-  assert_dir_not_contains_string "${dir}" "ys_core"
+  assert_dir_not_contains_string "${dir}" "ys_base"
   assert_dir_not_contains_string "${dir}" "YOURSITE"
   assert_dir_not_contains_string "${dir}" "YourSite"
   assert_dir_not_contains_string "${dir}" "your_site_theme"
