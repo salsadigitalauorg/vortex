@@ -1,0 +1,9 @@
+@@ -1,5 +1,5 @@
+-name: star wars Base
++name: New hope Base
+ type: module
+-description: Base feature for star wars site.
++description: Base feature for New hope site.
+ core_version_requirement: ^11
+-package: star_wars
++package: the_new_hope

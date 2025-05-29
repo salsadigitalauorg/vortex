@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\star_wars\Unit;
+namespace Drupal\Tests\sw_core\Kernel;
 
-use Drupal\Tests\UnitTestCase;
+use Drupal\KernelTests\KernelTestBase;
 use Drupal\Tests\sw_core\Traits\ArrayTrait;
 use Drupal\Tests\sw_core\Traits\AssertTrait;
 use Drupal\Tests\sw_core\Traits\MockTrait;
 use Drupal\Tests\sw_core\Traits\ReflectionTrait;
 
 /**
- * Class StarWarsUnitTestBase.
+ * Class SwCoreKernelTestBase.
  *
- * Base class for all unit test cases.
+ * Base class for kernel tests.
  *
- * @package Drupal\star_wars\Tests
+ * @package Drupal\sw_core\Tests
  */
-abstract class StarWarsUnitTestBase extends UnitTestCase {
+abstract class SwCoreKernelTestBase extends KernelTestBase {
 
   use ArrayTrait;
   use AssertTrait;
