@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\sw_core\Unit;
+namespace Drupal\Tests\sw_base\Kernel;
 
 /**
  * Class ExampleTest.
  *
- * Example unit test case class.
+ * Example kernel test case class.
  *
- * @group SwCore
+ * @group SwBase
  *
- * @package Drupal\sw_core\Tests
+ * @package Drupal\sw_base\Tests
  */
-class ExampleTest extends SwCoreUnitTestBase {
+class ExampleTest extends SwBaseKernelTestBase {
 
   /**
    * Tests addition.
@@ -47,7 +47,7 @@ class ExampleTest extends SwCoreUnitTestBase {
    * Tests subtraction.
    *
    * @dataProvider dataProviderSubtract
-   * @group unit:subtraction
+   * @group kernel:subtraction
    */
   public function testSubtract(int $a, int $b, int $expected, string|null $expectExceptionMessage = NULL): void {
     if ($expectExceptionMessage) {

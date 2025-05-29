@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\star_wars\Functional;
+namespace Drupal\Tests\sw_base\Functional;
 
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\sw_base\Traits\ArrayTrait;
@@ -11,13 +11,13 @@ use Drupal\Tests\sw_base\Traits\MockTrait;
 use Drupal\Tests\sw_base\Traits\ReflectionTrait;
 
 /**
- * Class StarWarsFunctionalTestBase.
+ * Class SwBaseFunctionalTestBase.
  *
  * Base class for functional tests.
  *
- * @package Drupal\star_wars\Tests
+ * @package Drupal\sw_base\Tests
  */
-abstract class StarWarsFunctionalTestBase extends BrowserTestBase {
+abstract class SwBaseFunctionalTestBase extends BrowserTestBase {
 
   use ArrayTrait;
   use AssertTrait;

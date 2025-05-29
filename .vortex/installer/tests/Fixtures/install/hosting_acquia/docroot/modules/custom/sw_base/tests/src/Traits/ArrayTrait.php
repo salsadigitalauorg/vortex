@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\sw_core\Traits;
+namespace Drupal\Tests\sw_base\Traits;
 
 /**
  * Trait ArrayTrait.

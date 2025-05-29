@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\star_wars\Kernel;
+namespace Drupal\Tests\sw_base\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\Tests\sw_base\Traits\ArrayTrait;
@@ -11,13 +11,13 @@ use Drupal\Tests\sw_base\Traits\MockTrait;
 use Drupal\Tests\sw_base\Traits\ReflectionTrait;
 
 /**
- * Class StarWarsKernelTestBase.
+ * Class SwBaseKernelTestBase.
  *
  * Base class for kernel tests.
  *
- * @package Drupal\star_wars\Tests
+ * @package Drupal\sw_base\Tests
  */
-abstract class StarWarsKernelTestBase extends KernelTestBase {
+abstract class SwBaseKernelTestBase extends KernelTestBase {
 
   use ArrayTrait;
   use AssertTrait;

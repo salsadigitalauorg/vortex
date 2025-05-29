@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\sw_core\Functional;
+namespace Drupal\Tests\sw_base\Functional;
 
 /**
  * Class ExampleTest.
  *
  * Example functional test case class.
  *
- * @group SwCore
+ * @group SwBase
  *
- * @package Drupal\sw_core\Tests
+ * @package Drupal\sw_base\Tests
  */
-class ExampleTest extends SwCoreFunctionalTestBase {
+class ExampleTest extends SwBaseFunctionalTestBase {
 
   /**
    * {@inheritdoc}
