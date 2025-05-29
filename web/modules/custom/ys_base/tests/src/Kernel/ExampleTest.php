@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\ys_core\Kernel;
+namespace Drupal\Tests\ys_base\Kernel;
 
 /**
  * Class ExampleTest.
  *
  * Example kernel test case class.
  *
- * @group YsCore
+ * @group YsBase
  *
- * @package Drupal\ys_core\Tests
+ * @package Drupal\ys_base\Tests
  */
-class ExampleTest extends YsCoreKernelTestBase {
+class ExampleTest extends YsBaseKernelTestBase {
 
   /**
    * Tests addition.

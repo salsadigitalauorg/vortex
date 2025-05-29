@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\your_site_theme\Kernel;
+namespace Drupal\Tests\ys_base\Unit;
 
-use Drupal\KernelTests\KernelTestBase;
+use Drupal\Tests\UnitTestCase;
 use Drupal\Tests\ys_base\Traits\ArrayTrait;
 use Drupal\Tests\ys_base\Traits\AssertTrait;
 use Drupal\Tests\ys_base\Traits\MockTrait;
 use Drupal\Tests\ys_base\Traits\ReflectionTrait;
 
 /**
- * Class YourSiteThemeKernelTestBase.
+ * Class YsBaseUnitTestBase.
  *
- * Base class for kernel tests.
+ * Base class for all unit test cases.
  *
- * @package Drupal\your_site_theme\Tests
+ * @package Drupal\ys_base\Tests
  */
-abstract class YourSiteThemeKernelTestBase extends KernelTestBase {
+abstract class YsBaseUnitTestBase extends UnitTestCase {
 
   use ArrayTrait;
   use AssertTrait;

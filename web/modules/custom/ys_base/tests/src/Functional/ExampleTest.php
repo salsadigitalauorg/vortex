@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\ys_core\Functional;
+namespace Drupal\Tests\ys_base\Functional;
 
 /**
  * Class ExampleTest.
  *
  * Example functional test case class.
  *
- * @group YsCore
+ * @group YsBase
  *
- * @package Drupal\ys_core\Tests
+ * @package Drupal\ys_base\Tests
  */
-class ExampleTest extends YsCoreFunctionalTestBase {
+class ExampleTest extends YsBaseFunctionalTestBase {
 
   /**
    * {@inheritdoc}

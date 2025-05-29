@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\ys_core\Unit;
+namespace Drupal\Tests\ys_base\Unit;
 
 /**
  * Class ExampleTest.
  *
  * Example unit test case class.
  *
- * @group YsCore
+ * @group YsBase
  *
- * @package Drupal\ys_core\Tests
+ * @package Drupal\ys_base\Tests
  */
-class ExampleTest extends YsCoreUnitTestBase {
+class ExampleTest extends YsBaseUnitTestBase {
 
   /**
    * Tests addition.
