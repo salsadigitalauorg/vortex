@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\light_saber\Functional;
+namespace Drupal\Tests\sw_base\Functional;
 
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\sw_base\Traits\ArrayTrait;
@@ -11,13 +11,13 @@ use Drupal\Tests\sw_base\Traits\MockTrait;
 use Drupal\Tests\sw_base\Traits\ReflectionTrait;
 
 /**
- * Class LightSaberFunctionalTestBase.
+ * Class SwBaseFunctionalTestBase.
  *
  * Base class for functional tests.
  *
- * @package Drupal\light_saber\Tests
+ * @package Drupal\sw_base\Tests
  */
-abstract class LightSaberFunctionalTestBase extends BrowserTestBase {
+abstract class SwBaseFunctionalTestBase extends BrowserTestBase {
 
   use ArrayTrait;
   use AssertTrait;

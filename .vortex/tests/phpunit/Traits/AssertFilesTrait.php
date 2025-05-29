@@ -41,13 +41,13 @@ trait AssertFilesTrait {
   protected function assertCommonFilesAbsent(string $webroot = 'web'): void {
     // Example directories and files that should not exist after Vortex removed.
     Assert::assertDirectoryDoesNotExist($webroot . '/profiles/custom/your_site_profile');
-    Assert::assertDirectoryDoesNotExist($webroot . '/modules/custom/ys_base');
-    Assert::assertFileDoesNotExist($webroot . '/modules/custom/ys_base/tests/src/Unit/YourSiteExampleUnitTest.php');
-    Assert::assertFileDoesNotExist($webroot . '/modules/custom/ys_base/tests/src/Unit/YourSiteCoreUnitTestBase.php');
-    Assert::assertFileDoesNotExist($webroot . '/modules/custom/ys_base/tests/src/Kernel/YourSiteExampleKernelTest.php');
-    Assert::assertFileDoesNotExist($webroot . '/modules/custom/ys_base/tests/src/Kernel/YourSiteCoreKernelTestBase.php');
-    Assert::assertFileDoesNotExist($webroot . '/modules/custom/ys_base/tests/src/Functional/YourSiteExampleFunctionalTest.php');
-    Assert::assertFileDoesNotExist($webroot . '/modules/custom/ys_base/tests/src/Functional/YourSiteCoreFunctionalTestBase.php');
+    Assert::assertDirectoryDoesNotExist($webroot . '/modules/custom/ys_core');
+    Assert::assertFileDoesNotExist($webroot . '/modules/custom/ys_core/tests/src/Unit/YourSiteExampleUnitTest.php');
+    Assert::assertFileDoesNotExist($webroot . '/modules/custom/ys_core/tests/src/Unit/YourSiteCoreUnitTestBase.php');
+    Assert::assertFileDoesNotExist($webroot . '/modules/custom/ys_core/tests/src/Kernel/YourSiteExampleKernelTest.php');
+    Assert::assertFileDoesNotExist($webroot . '/modules/custom/ys_core/tests/src/Kernel/YourSiteCoreKernelTestBase.php');
+    Assert::assertFileDoesNotExist($webroot . '/modules/custom/ys_core/tests/src/Functional/YourSiteExampleFunctionalTest.php');
+    Assert::assertFileDoesNotExist($webroot . '/modules/custom/ys_core/tests/src/Functional/YourSiteCoreFunctionalTestBase.php');
     Assert::assertDirectoryDoesNotExist($webroot . '/modules/custom/ys_search');
     Assert::assertDirectoryDoesNotExist($webroot . '/themes/custom/your_site_theme');
 
@@ -222,16 +222,16 @@ trait AssertFilesTrait {
     Assert::assertDirectoryDoesNotExist($webroot . '/themes/custom/your_site_theme');
 
     // Site core module created.
-    Assert::assertDirectoryExists($webroot . '/modules/custom/sw_core');
-    Assert::assertFileExists($webroot . '/modules/custom/sw_core/sw_core.info.yml');
-    Assert::assertFileExists($webroot . '/modules/custom/sw_core/sw_core.module');
-    Assert::assertFileExists($webroot . '/modules/custom/sw_core/sw_core.deploy.php');
-    Assert::assertFileExists($webroot . '/modules/custom/sw_core/tests/src/Unit/SwCoreUnitTestBase.php');
-    Assert::assertFileExists($webroot . '/modules/custom/sw_core/tests/src/Unit/ExampleTest.php');
-    Assert::assertFileExists($webroot . '/modules/custom/sw_core/tests/src/Kernel/SwCoreKernelTestBase.php');
-    Assert::assertFileExists($webroot . '/modules/custom/sw_core/tests/src/Kernel/ExampleTest.php');
-    Assert::assertFileExists($webroot . '/modules/custom/sw_core/tests/src/Functional/SwCoreFunctionalTestBase.php');
-    Assert::assertFileExists($webroot . '/modules/custom/sw_core/tests/src/Functional/ExampleTest.php');
+    Assert::assertDirectoryExists($webroot . '/modules/custom/sw_base');
+    Assert::assertFileExists($webroot . '/modules/custom/sw_base/sw_base.info.yml');
+    Assert::assertFileExists($webroot . '/modules/custom/sw_base/sw_base.module');
+    Assert::assertFileExists($webroot . '/modules/custom/sw_base/sw_base.deploy.php');
+    Assert::assertFileExists($webroot . '/modules/custom/sw_base/tests/src/Unit/SwBaseUnitTestBase.php');
+    Assert::assertFileExists($webroot . '/modules/custom/sw_base/tests/src/Unit/ExampleTest.php');
+    Assert::assertFileExists($webroot . '/modules/custom/sw_base/tests/src/Kernel/SwBaseKernelTestBase.php');
+    Assert::assertFileExists($webroot . '/modules/custom/sw_base/tests/src/Kernel/ExampleTest.php');
+    Assert::assertFileExists($webroot . '/modules/custom/sw_base/tests/src/Functional/SwBaseFunctionalTestBase.php');
+    Assert::assertFileExists($webroot . '/modules/custom/sw_base/tests/src/Functional/ExampleTest.php');
 
     // Site search module created.
     Assert::assertDirectoryExists($webroot . '/modules/custom/sw_search');

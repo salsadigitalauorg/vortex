@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\light_saber\Kernel;
+namespace Drupal\Tests\sw_base\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\Tests\sw_base\Traits\ArrayTrait;
@@ -11,13 +11,13 @@ use Drupal\Tests\sw_base\Traits\MockTrait;
 use Drupal\Tests\sw_base\Traits\ReflectionTrait;
 
 /**
- * Class LightSaberKernelTestBase.
+ * Class SwBaseKernelTestBase.
  *
  * Base class for kernel tests.
  *
- * @package Drupal\light_saber\Tests
+ * @package Drupal\sw_base\Tests
  */
-abstract class LightSaberKernelTestBase extends KernelTestBase {
+abstract class SwBaseKernelTestBase extends KernelTestBase {
 
   use ArrayTrait;
   use AssertTrait;
