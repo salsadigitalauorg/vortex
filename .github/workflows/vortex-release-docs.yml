@@ -102,11 +102,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: vortex-installer
-          path: ./
+          path: .vortex/docs/
 
       - name: Copy installer to docs
         run: |
-          cp ../installer ./static/install
+          cp ./installer ./static/install
+          chmod +x ./static/install
           php ./static/install --version
 
       - name: Check docs up-to-date
