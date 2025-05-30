@@ -7,6 +7,7 @@ namespace DrevOps\Installer\Prompts\Handlers;
 use DrevOps\Installer\Utils\Converter;
 use DrevOps\Installer\Utils\Env;
 use DrevOps\Installer\Utils\File;
+use AlexSkrypnyk\File\Internal\ExtendedSplFileInfo;
 
 class Theme extends AbstractHandler {
 
@@ -73,7 +74,12 @@ class Theme extends AbstractHandler {
         File::replaceContent($t . '/.ahoy.yml', 'cmd: ahoy lint-be-fix && ahoy lint-fe-fix', 'cmd: ahoy lint-be-fix');
       }
 
-      File::removeTokenInDir($this->tmpDir, 'DRUPAL_THEME');
+      File::addTaskDirectory(function(ExtendedSplFileInfo $file_info): ExtendedSplFileInfo {
+        $content = File::removeToken($file_info->getContent(), '#;< DRUPAL_THEME', '#;> DRUPAL_THEME', TRUE);
+        $file_info->setContent($content);
+        return $file_info;
+      });
+      File::runTaskDirectory($this->tmpDir);
 
       return;
     }
@@ -105,8 +111,14 @@ class Theme extends AbstractHandler {
       }
     }
 
-    File::replaceContentInDir($t, 'your_site_theme', $v);
-    File::replaceContentInDir($t, 'YourSiteTheme', Converter::pascal($v));
+    File::addTaskDirectory(function(ExtendedSplFileInfo $file_info) use ($v): ExtendedSplFileInfo {
+      $content = $file_info->getContent();
+      $content = File::replaceContent($content, 'your_site_theme', $v);
+      $content = File::replaceContent($content, 'YourSiteTheme', Converter::pascal($v));
+      $file_info->setContent($content);
+      return $file_info;
+    });
+    File::runTaskDirectory($t);
 
     File::renameInDir($t, 'your_site_theme', $v);
     File::renameInDir($t, 'YourSiteTheme', Converter::pascal($v));

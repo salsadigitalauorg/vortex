@@ -6,6 +6,7 @@ namespace DrevOps\Installer\Prompts\Handlers;
 
 use DrevOps\Installer\Utils\Env;
 use DrevOps\Installer\Utils\File;
+use AlexSkrypnyk\File\Internal\ExtendedSplFileInfo;
 
 class DatabaseDownloadSource extends AbstractHandler {
 
@@ -48,15 +49,26 @@ class DatabaseDownloadSource extends AbstractHandler {
       DatabaseDownloadSource::CONTAINER_REGISTRY,
     ];
 
-    foreach ($types as $t) {
-      $token = 'DB_DOWNLOAD_SOURCE_' . strtoupper($t);
-      if ($t === $type) {
-        File::removeTokenInDir($this->tmpDir, '!' . $token);
+    // Batch process all token removals for better performance
+    File::addTaskDirectory(function(ExtendedSplFileInfo $file_info) use ($types, $type): ExtendedSplFileInfo {
+      $content = $file_info->getContent();
+      
+      foreach ($types as $t) {
+        $token = 'DB_DOWNLOAD_SOURCE_' . strtoupper($t);
+        if ($t === $type) {
+          // Remove negated token (equivalent to removeTokenInDir with '!' prefix)
+          $content = File::removeToken($content, '#;< !' . $token, '#;> !' . $token, TRUE);
+        } else {
+          // Remove normal token (equivalent to removeTokenInDir)
+          $content = File::removeToken($content, '#;< ' . $token, '#;> ' . $token, TRUE);
+        }
       }
-      else {
-        File::removeTokenInDir($this->tmpDir, $token);
-      }
-    }
+      
+      $file_info->setContent($content);
+      return $file_info;
+    });
+    
+    File::runTaskDirectory($this->tmpDir);
   }
 
 }

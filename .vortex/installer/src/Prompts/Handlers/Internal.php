@@ -7,6 +7,7 @@ namespace DrevOps\Installer\Prompts\Handlers;
 use DrevOps\Installer\Utils\Config;
 use DrevOps\Installer\Utils\Env;
 use DrevOps\Installer\Utils\File;
+use AlexSkrypnyk\File\Internal\ExtendedSplFileInfo;
 
 class Internal extends AbstractHandler {
 
@@ -17,16 +18,45 @@ class Internal extends AbstractHandler {
 
   public function process(): void {
     $version = (string) $this->config->get(Config::VERSION);
-    File::replaceContentInDir($this->tmpDir, 'VORTEX_VERSION_URLENCODED', str_replace('-', '--', $version));
-    File::replaceContentInDir($this->tmpDir, 'VORTEX_VERSION', $version);
-
+    
     $this->processDemoMode($this->responses, $this->tmpDir);
 
-    // Remove code required for Vortex maintenance.
-    File::removeTokenInDir($this->tmpDir, 'VORTEX_DEV');
-
-    // Remove all other comments.
-    File::removeTokenInDir($this->tmpDir);
+    // Batch process all directory operations for better performance
+    $ignore_empty_line_processing = [
+      '/web/sites/default/default.settings.php',
+      '/web/sites/default/default.services.yml',
+      '/.docker/config/solr/config-set/',
+    ];
+    $tmpDir = $this->tmpDir;
+    
+    File::addTaskDirectory(function(ExtendedSplFileInfo $file_info) use ($version, $ignore_empty_line_processing, $tmpDir): ExtendedSplFileInfo {
+      $content = $file_info->getContent();
+      
+      // Replace version placeholders
+      $content = File::replaceContent($content, 'VORTEX_VERSION_URLENCODED', str_replace('-', '--', $version));
+      $content = File::replaceContent($content, 'VORTEX_VERSION', $version);
+      
+      // Remove code required for Vortex maintenance
+      $content = File::removeToken($content, '#;< VORTEX_DEV', '#;> VORTEX_DEV', TRUE);
+      
+      // Remove all other comments (equivalent to removeTokenInDir without parameters)
+      $content = File::removeToken($content, '#;', '#;', FALSE);
+      
+      // Enable commented out code
+      $content = File::replaceContent($content, '##### ', '');
+      
+      // Process empty lines (equivalent to the separate empty line processing step)
+      // But exclude specific files that should not have empty line processing
+      $relative_path = str_replace($tmpDir, '', $file_info->getPathname());
+      if (!in_array($relative_path, $ignore_empty_line_processing)) {
+        $content = File::replaceContent($content, '/(\n\s*\n)+/', "\n\n");
+      }
+      
+      $file_info->setContent($content);
+      return $file_info;
+    });
+    
+    File::runTaskDirectory($this->tmpDir);
 
     if (file_exists($this->tmpDir . DIRECTORY_SEPARATOR . 'README.dist.md')) {
       rename($this->tmpDir . DIRECTORY_SEPARATOR . 'README.dist.md', $this->tmpDir . DIRECTORY_SEPARATOR . 'README.md');
@@ -49,20 +79,8 @@ class Internal extends AbstractHandler {
       }
     }
 
-    // Enable commented out code.
-    File::replaceContentInDir($this->tmpDir, '##### ', '');
 
-    // Process empty lines.
-    $ignore = array_merge(File::ignoredPaths(), [
-      '/web/sites/default/default.settings.php',
-      '/web/sites/default/default.services.yml',
-      '/.docker/config/solr/config-set/',
-    ]);
-
-    $files = File::scandirRecursive($this->tmpDir, $ignore);
-    foreach ($files as $filename) {
-      File::replaceContent($filename, '/(\n\s*\n)+/', "\n\n");
-    }
+    // Empty line processing is now handled in the batch processing above
   }
 
   protected function processDemoMode(array $responses, string $dir): void {
@@ -96,7 +114,12 @@ class Internal extends AbstractHandler {
     }
 
     if (!$this->config->get(Config::IS_DEMO_MODE)) {
-      File::removeTokenInDir($dir, 'DEMO');
+      File::addTaskDirectory(function(ExtendedSplFileInfo $file_info): ExtendedSplFileInfo {
+        $content = File::removeToken($file_info->getContent(), '#;< DEMO', '#;> DEMO', TRUE);
+        $file_info->setContent($content);
+        return $file_info;
+      });
+      File::runTaskDirectory($dir);
     }
   }
 

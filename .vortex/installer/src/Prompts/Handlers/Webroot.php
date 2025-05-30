@@ -7,6 +7,7 @@ namespace DrevOps\Installer\Prompts\Handlers;
 use DrevOps\Installer\Utils\Composer;
 use DrevOps\Installer\Utils\Env;
 use DrevOps\Installer\Utils\File;
+use AlexSkrypnyk\File\Internal\ExtendedSplFileInfo;
 
 class Webroot extends AbstractHandler {
 
@@ -46,13 +47,20 @@ class Webroot extends AbstractHandler {
       return;
     }
 
-    File::replaceContentInDir($t, sprintf('%s/', self::WEB), $v . '/');
-    File::replaceContentInDir($t, sprintf('%s\/', self::WEB), $v . '\/');
-    File::replaceContentInDir($t, sprintf(': %s', self::WEB), ': ' . $v);
-    File::replaceContentInDir($t, sprintf('=%s', self::WEB), '=' . $v);
-    File::replaceContentInDir($t, sprintf('!%s', self::WEB), '!' . $v);
-    File::replaceContentInDir($t, sprintf('/\/%s\//', self::WEB), '/' . $v . '/');
-    File::replaceContentInDir($t, sprintf('/\'\/%s\'/', self::WEB), "'/" . $v . "'");
+    // Batch process all webroot replacements for better performance
+    File::addTaskDirectory(function(ExtendedSplFileInfo $file_info) use ($v): ExtendedSplFileInfo {
+      $content = $file_info->getContent();
+      $content = File::replaceContent($content, sprintf('%s/', self::WEB), $v . '/');
+      $content = File::replaceContent($content, sprintf('%s\/', self::WEB), $v . '\/');
+      $content = File::replaceContent($content, sprintf(': %s', self::WEB), ': ' . $v);
+      $content = File::replaceContent($content, sprintf('=%s', self::WEB), '=' . $v);
+      $content = File::replaceContent($content, sprintf('!%s', self::WEB), '!' . $v);
+      $content = File::replaceContent($content, sprintf('/\/%s\//', self::WEB), '/' . $v . '/');
+      $content = File::replaceContent($content, sprintf('/\'\/%s\'/', self::WEB), "'/" . $v . "'");
+      $file_info->setContent($content);
+      return $file_info;
+    });
+    File::runTaskDirectory($t);
     rename($t . DIRECTORY_SEPARATOR . self::WEB, $t . DIRECTORY_SEPARATOR . $v);
   }
 

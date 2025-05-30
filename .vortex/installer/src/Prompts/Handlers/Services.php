@@ -6,6 +6,7 @@ namespace DrevOps\Installer\Prompts\Handlers;
 
 use DrevOps\Installer\Utils\File;
 use Symfony\Component\Yaml\Yaml;
+use AlexSkrypnyk\File\Internal\ExtendedSplFileInfo;
 
 class Services extends AbstractHandler {
 
@@ -61,11 +62,39 @@ class Services extends AbstractHandler {
     $t = $this->tmpDir;
     $w = $this->webroot;
 
-    if (in_array(self::CLAMAV, $v)) {
-      File::removeTokenInDir($t, '!SERVICE_CLAMAV');
-    }
-    else {
-      File::removeTokenInDir($t, 'SERVICE_CLAMAV');
+    // Batch process token removal operations for better performance
+    File::addTaskDirectory(function(ExtendedSplFileInfo $file_info) use ($v): ExtendedSplFileInfo {
+      $content = $file_info->getContent();
+      
+      // Handle ClamAV tokens
+      if (in_array(self::CLAMAV, $v)) {
+        $content = File::removeToken($content, '#;< !SERVICE_CLAMAV', '#;> !SERVICE_CLAMAV', TRUE);
+      } else {
+        $content = File::removeToken($content, '#;< SERVICE_CLAMAV', '#;> SERVICE_CLAMAV', TRUE);
+      }
+      
+      // Handle Solr tokens
+      if (in_array(self::SOLR, $v)) {
+        $content = File::removeToken($content, '#;< !SERVICE_SOLR', '#;> !SERVICE_SOLR', TRUE);
+      } else {
+        $content = File::removeToken($content, '#;< SERVICE_SOLR', '#;> SERVICE_SOLR', TRUE);
+      }
+      
+      // Handle Valkey tokens
+      if (in_array(self::VALKEY, $v)) {
+        $content = File::removeToken($content, '#;< !SERVICE_VALKEY', '#;> !SERVICE_VALKEY', TRUE);
+      } else {
+        $content = File::removeToken($content, '#;< SERVICE_VALKEY', '#;> SERVICE_VALKEY', TRUE);
+      }
+      
+      $file_info->setContent($content);
+      return $file_info;
+    });
+    
+    File::runTaskDirectory($t);
+    
+    // Handle non-token operations (file removals and specific file content changes)
+    if (!in_array(self::CLAMAV, $v)) {
       File::rmdir($t . DIRECTORY_SEPARATOR . '.docker/config/clamav');
       @unlink($t . DIRECTORY_SEPARATOR . '.docker/clamav.dockerfile');
       @unlink($t . DIRECTORY_SEPARATOR . $w . DIRECTORY_SEPARATOR . 'sites/default/includes/modules/settings.clamav.php');
@@ -74,11 +103,7 @@ class Services extends AbstractHandler {
       File::replaceContent($t . DIRECTORY_SEPARATOR . 'composer.json', '/\s*"drupal\/clamav":\s*"[^\"]+",?\n/', "\n");
     }
 
-    if (in_array(self::SOLR, $v)) {
-      File::removeTokenInDir($t, '!SERVICE_SOLR');
-    }
-    else {
-      File::removeTokenInDir($t, 'SERVICE_SOLR');
+    if (!in_array(self::SOLR, $v)) {
       File::rmdir($t . DIRECTORY_SEPARATOR . '.docker/config/solr');
       @unlink($t . DIRECTORY_SEPARATOR . '.docker/solr.dockerfile');
       @unlink($t . DIRECTORY_SEPARATOR . $w . DIRECTORY_SEPARATOR . 'sites/default/includes/modules/settings.solr.php');
@@ -102,11 +127,7 @@ class Services extends AbstractHandler {
       }
     }
 
-    if (in_array(self::VALKEY, $v)) {
-      File::removeTokenInDir($t, '!SERVICE_VALKEY');
-    }
-    else {
-      File::removeTokenInDir($t, 'SERVICE_VALKEY');
+    if (!in_array(self::VALKEY, $v)) {
       File::rmdir($t . DIRECTORY_SEPARATOR . '.docker/config/valkey');
       @unlink($t . DIRECTORY_SEPARATOR . '.docker/valkey.dockerfile');
       @unlink($t . DIRECTORY_SEPARATOR . $w . DIRECTORY_SEPARATOR . 'sites/default/includes/modules/settings.redis.php');
