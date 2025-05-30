@@ -150,6 +150,11 @@ class Downloader {
 
     $records = json_decode($release_contents, TRUE);
 
+    // Check if records is empty or not an array
+    if (!is_array($records) || empty($records)) {
+      return NULL;
+    }
+
     if (!$release_prefix) {
       return is_scalar($records[0]['tag_name']) ? strval($records[0]['tag_name']) : NULL;
     }

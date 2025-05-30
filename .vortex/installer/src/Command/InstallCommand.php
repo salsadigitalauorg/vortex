@@ -220,7 +220,7 @@ EOF
       Env::putFromDotenv($this->config->getDst() . '/.env');
     }
 
-    [$repo, $ref] = Downloader::parseUri($options[static::OPTION_URI] ?: 'https://github.com/salsadigitalauorg/vortex.git@a6cb39a');
+    [$repo, $ref] = Downloader::parseUri($options[static::OPTION_URI] ?: 'https://github.com/salsadigitalauorg/vortex.git@stable');
     $this->config->set(Config::REPO, $repo);
     $this->config->set(Config::REF, $ref);
 
