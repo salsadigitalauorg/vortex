@@ -41,4 +41,10 @@ class Validator {
     return (bool) preg_match('/^[0-9a-f]{7}$/i', $value);
   }
 
+  public static function gitBranch(string $value): bool {
+    // Git branch names can contain letters, numbers, hyphens, underscores, dots, and forward slashes
+    // but cannot start with a dot, hyphen, or forward slash, and cannot end with a dot or forward slash
+    return (bool) preg_match('/^[a-zA-Z0-9][a-zA-Z0-9._\/-]*[a-zA-Z0-9]$|^[a-zA-Z0-9]$/', $value);
+  }
+
 }

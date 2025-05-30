@@ -58,8 +58,8 @@ class Downloader {
       $ref = $matches[2] ?? static::REF_HEAD;
     }
 
-    if ($ref != static::REF_STABLE && $ref != static::REF_HEAD && !Validator::gitCommit($ref) && !Validator::gitShortCommit($ref)) {
-      throw new \RuntimeException(sprintf('Invalid reference format: "%s". Supported formats are: %s, %s, %s, %s.', $ref, static::REF_STABLE, static::REF_HEAD, '40-character commit hash', '7-character commit hash'));
+    if ($ref != static::REF_STABLE && $ref != static::REF_HEAD && !Validator::gitCommit($ref) && !Validator::gitShortCommit($ref) && !Validator::gitBranch($ref)) {
+      throw new \RuntimeException(sprintf('Invalid reference format: "%s". Supported formats are: %s, %s, %s, %s, %s.', $ref, static::REF_STABLE, static::REF_HEAD, '40-character commit hash', '7-character commit hash', 'branch name'));
     }
 
     return [$repo, $ref];
