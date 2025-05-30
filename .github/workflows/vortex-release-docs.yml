@@ -8,6 +8,7 @@ on:
     branches:
       - '**release-docs**'
       - '**release-installer**'
+      - 'develop'  # Add main branch for easier testing
 
 permissions:
   contents: read
@@ -69,14 +70,21 @@ jobs:
   vortex-release-docs:
     needs: vortex-release-installer
 
+    runs-on: ubuntu-latest
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
     environment:
       name: github-pages
-
-    runs-on: ubuntu-latest
+      url: ${{ steps.deployment.outputs.page_url }}
 
     defaults:
       run:
-        working-directory: docs
+        working-directory: .vortex/docs
 
     steps:
       - name: Checkout code
@@ -94,26 +102,27 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: vortex-installer
+          path: ./
 
       - name: Copy installer to docs
         run: |
-          cp ../installer ../.vortex/docs/static/install
-          php ../.vortex/docs/static/install --version
+          cp ../installer ./static/install
+          php ./static/install --version
 
       - name: Check docs up-to-date
         run: |
           composer --working-dir=.utils install
           npm run update-variables
           git diff --quiet HEAD || { echo "Docs not up-to-date. Run 'cd .vortex && ahoy update-docs' and commit changes."; git diff; exit 1; }
-        working-directory: .vortex/docs
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-        working-directory: .vortex/docs
 
       - name: Build documentation site
         run: yarn run build
-        working-directory: .vortex/docs
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
 
       - name: Upload documentation site
         uses: actions/upload-pages-artifact@v3
@@ -121,4 +130,5 @@ jobs:
           path: .vortex/docs/build
 
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4

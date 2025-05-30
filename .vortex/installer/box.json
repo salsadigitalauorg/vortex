@@ -2,13 +2,13 @@
     "output": "build/installer",
     "banner": [
         "@file",
-        "Vortex CLI installer.",
+        "Custom Vortex CLI installer.",
         "",
         "<!-- -->",
-        "CLI installer for <a href=\"https://github.com/drevops/vortex\">Vortex</a> project.<br/>",
+        "CLI installer for <a href=\"https://github.com/salsadigitalauorg/vortex\">Vortex</a> project.<br/>",
         "Run in your terminal:<br/>",
-        "<code>curl -SsL https://vortex.drevops.com/install > install.php && php install.php</code><br/>",
-        "More details: <a href=\"https://vortex.drevops.com\">https://vortex.drevops.com</a>",
+        "<code>curl -SsL https://salsadigitalauorg.github.io/vortex/install > install.php && php install.php</code><br/>",
+        "More details: <a href=\"https://salsadigitalauorg.github.io/vortex\">https://salsadigitalauorg.github.io/vortex</a>",
         "<!--"
     ],
     "finder": [
