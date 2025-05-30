@@ -53,12 +53,12 @@ jobs:
           include-hidden-files: true
           if-no-files-found: error
 
-      - name: Upload coverage report to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          files: .vortex/installer/.logs/cobertura.xml
-          fail_ci_if_error: true
-          token: ${{ secrets.CODECOV_TOKEN }}
+      # - name: Upload coverage report to Codecov
+      #   uses: codecov/codecov-action@v5
+      #   with:
+      #     files: .vortex/installer/.logs/cobertura.xml
+      #     fail_ci_if_error: true
+      #     token: ${{ secrets.CODECOV_TOKEN }}
 
       # Smoke test for PHAR.
       - name: Build PHAR
