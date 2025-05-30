@@ -13,14 +13,14 @@ const config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://vortex.drevops.com/',
+  url: 'https://salsadigitalauorg.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: '/vortex/',
 
   // GitHub pages deployment config.
-  organizationName: 'DrevOps',
-  projectName: 'Vortex',
+  organizationName: 'salsadigitalauorg',
+  projectName: 'vortex',
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
@@ -45,7 +45,7 @@ const config = {
           path: 'content',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: 'https://github.com/drevops/vortex/tree/develop/.vortex/docs/',
+          editUrl: 'https://github.com/salsadigitalauorg/vortex/tree/develop/.vortex/docs/',
         },
         blog: false,
         theme: {
@@ -114,7 +114,7 @@ const config = {
             href: '/workflows',
           },
           {
-            href: 'https://github.com/drevops/vortex',
+            href: 'https://github.com/salsadigitalauorg/vortex',
             label: 'GitHub',
             position: 'right',
             title: 'View source on GitHub',
