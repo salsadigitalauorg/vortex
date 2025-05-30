@@ -73,8 +73,15 @@ class Downloader {
 
     $version = $ref;
     if ($ref === Downloader::REF_STABLE) {
-      $ref = $this->discoverLatestReleaseRemote($repo_url);
-      $version = $ref;
+      $discovered_ref = $this->discoverLatestReleaseRemote($repo_url);
+      if ($discovered_ref === null) {
+        // Fallback to HEAD if no releases are found
+        $ref = Downloader::REF_HEAD;
+        $version = 'develop';
+      } else {
+        $ref = $discovered_ref;
+        $version = $ref;
+      }
     }
     elseif ($ref === Downloader::REF_HEAD) {
       $version = 'develop';
