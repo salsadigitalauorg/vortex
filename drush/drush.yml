@@ -1,11 +1,7 @@
-command:
-  sql:
-    cli:
-      options:
-        extra: '--disable-ssl'
-    query:
-      options:
-        extra: '--disable-ssl'
-    dump:
-      options:
-        extra-dump: '--disable-ssl --no-tablespaces'
+sql:
+  dump:
+    options:
+      extra-dump: '--no-tablespaces --ssl=0'
+  cli:
+    options:
+      extra: '--ssl=0'
