@@ -4,6 +4,14 @@
     files: /app/web/sites/default/files
     drush-script: /app/vendor/bin/drush
   user: ${env-name}
+  options:
+    backup-dir: /tmp
+  command-specific:
+    sql-sync:
+      no-ordered-dump: true
+      ssl: false
+    sql-dump:
+      extra-dump: '--no-tablespaces --ssl=0'
   ssh:
     options: '-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o LogLevel=FATAL -p 32222'
     tty: false
