@@ -369,6 +369,7 @@ jobs:
         TERM: xterm-256color
         VORTEX_SSH_DISABLE_STRICT_HOST_KEY_CHECKING: "1"
         VORTEX_DEBUG: ${{ vars.VORTEX_DEBUG }}
+        VORTEX_DEPLOY_SSH_FILE: /root/.ssh/id_rsa
 
     steps:
       - name: Preserve $HOME set in the container
@@ -411,6 +412,7 @@ jobs:
           VORTEX_DEPLOY_ARTIFACT_GIT_REMOTE: ${{ vars.VORTEX_DEPLOY_ARTIFACT_GIT_REMOTE }}
           VORTEX_DEPLOY_ARTIFACT_GIT_USER_EMAIL: ${{ vars.VORTEX_DEPLOY_ARTIFACT_GIT_USER_EMAIL }}
           VORTEX_DEPLOY_ARTIFACT_GIT_USER_NAME: ${{ vars.VORTEX_DEPLOY_ARTIFACT_GIT_USER_NAME }}
+          VORTEX_DEPLOY_SSH_FILE: /root/.ssh/id_rsa
           VORTEX_DEPLOY_WEBHOOK_URL: ${{ vars.VORTEX_DEPLOY_WEBHOOK_URL }}
           VORTEX_DEPLOY_SKIP: ${{ vars.VORTEX_DEPLOY_SKIP }}
         timeout-minutes: 30
